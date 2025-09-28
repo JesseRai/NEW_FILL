@@ -1,0 +1,49 @@
+import psycopg2
+import csv
+import os
+
+# Database connection parameters
+conn_params = {
+    'dbname': 'Greencycles',
+    'user': 'postgres',
+    'password': 'Spoon',
+    'host': 'localhost',
+    'port': '5432'
+}
+
+# Output directory
+output_dir = "/Users/jesserai/PycharmProjects/Monk/Projects/Prtfolio/sql/tables/"
+
+# Ensure directory exists
+os.makedirs(output_dir, exist_ok=True)
+
+# Connect to the database
+conn = psycopg2.connect(**conn_params)
+cur = conn.cursor()
+
+# Get a list of tables in the public schema
+cur.execute("""
+    SELECT table_name
+    FROM information_schema.tables
+    WHERE table_schema = 'public';
+""")
+tables = cur.fetchall()
+
+# Export each table as a CSV
+for table in tables:
+    table_name = table[0]
+    cur.execute(f"SELECT * FROM {table_name};")
+    rows = cur.fetchall()
+    columns = [desc[0] for desc in cur.description]
+
+    file_path = os.path.join(output_dir, f"{table_name}.csv")
+    with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow(columns)
+        csvwriter.writerows(rows)
+
+print("Export completed successfully.")
+
+# Close the connection
+cur.close()
+conn.close()
