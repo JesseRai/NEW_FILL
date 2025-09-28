@@ -35,6 +35,10 @@ To reproduce the analysis:
 
 The images in this repository (`explain_analysis_part*.png` files) provide visual evidence of the query’s runtime characteristics.
 
----
+## Index Consideration
 
-For any future scaling or additional filters (e.g., frequent queries by customer or specific date ranges), consider adding targeted indexes and re‑examining the execution plan.
+A separate script (indexes.sql) contains sample index definitions that could be applied if the dataset were larger or if query performance became a bottleneck. For example, adding an index on (customer_id, payment_date) in the payment table could accelerate rolling window calculations.
+
+On the current dataset, these indexes are not needed: PostgreSQL’s default execution plan already completes the query in under a second. Maintaining extra indexes would add overhead without improving performance. The indexes.sql file is included to illustrate how the analysis could be scaled for bigger datasets or heavier computational workloads.
+
+---
