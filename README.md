@@ -32,7 +32,7 @@ During development, various indexing strategies were evaluated. For example, an 
 To reproduce the analysis:
 
 1. Ensure you have a PostgreSQL database with the DVD Rental dataset loaded.
-2. Run the contents of `analysis.sql` in a SQL client (e.g. pgAdmin or psql).
+2. Run the contents of `SQL_CODE.sql` in a SQL client (e.g. pgAdmin or psql).
 3. Review the output and query plan to see the same results and performance.
 
 The images in this repository (`statistics_table.png` and the `explain_analysis_part*.png` files) provide visual evidence of the query’s runtime characteristics.
