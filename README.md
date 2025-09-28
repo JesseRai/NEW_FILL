@@ -23,8 +23,6 @@ The final select lists each month–category combination with its top customers,
 ## Results
 The analysis showed that the query runs in under a second on the provided dataset (see the `analysis` tab of the query plan). Because the dataset is relatively small, PostgreSQL’s default execution plan already performs well, and adding indexes yields negligible improvement. The attached execution plan screenshots (`explain_analysis_part1.png` to `explain_analysis_part4.png`) show that sequential scans and hash joins are sufficient for the workload.
 
-A summary of the revenue by month and category is provided in `statistics_table.png` (first 15 rows shown). These results confirm that the query computes revenue and customer rankings correctly.
-
 ## Index Consideration
 During development, various indexing strategies were evaluated. For example, an index on `(customer_id, payment_date)` in the `payment` table could accelerate rolling window calculations if the dataset grows significantly. However, given the current data volume and query complexity, additional indexes would add maintenance overhead without noticeable performance gains. Therefore, no new indexes were applied.
 
