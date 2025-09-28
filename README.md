@@ -6,7 +6,7 @@ This project analyzes rental revenue from the DVD Rental dataset using PostgreSQ
 The analysis uses the following tables from the DVD Rental database: `payment`, `rental`, `inventory`, `film_category`, and `category`. Each payment is linked to a rental, which in turn is linked to an inventory item (a specific DVD copy). That copy belongs to a film and, through a join on `film_category`, is associated with a single category.
 
 ## Analysis Query
-The SQL query (see `analysis.sql`) performs several steps:
+The SQL query (see `SQL_CODE.sql`) performs several steps:
 
 1. **CTE_BASE** joins the payment, rental, and category tables and derives additional fields such as `paid_month`.
 2. **CTE_MONTH_CAT** aggregates revenue by month and category.
